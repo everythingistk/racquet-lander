@@ -189,11 +189,17 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   display: flex;
   width: max-content;
   animation: scroll-covers 60s linear infinite;
+  will-change: transform;
+  -webkit-animation: scroll-covers 60s linear infinite;
 }
 .cover-track img {
   height: 380px;
   width: auto;
   flex-shrink: 0;
+}
+@-webkit-keyframes scroll-covers {
+  0% { -webkit-transform: translateX(0); transform: translateX(0); }
+  100% { -webkit-transform: translateX(-50%); transform: translateX(-50%); }
 }
 @keyframes scroll-covers {
   0% { transform: translateX(0); }
@@ -712,7 +718,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   </div>
   <div class="hero-content">
     <h1 class="reveal">The magazine tennis <span>deserves.</span></h1>
-    <p class="hero-desc reveal reveal-d1">For those who know tennis isn&rsquo;t just a sport. Join a community of 30,000 fans and players who relish the art, history, and culture of the game. Featuring exclusive interviews, photography, essays, and more.</p>
+    <p class="hero-desc reveal reveal-d1">For those who know tennis isn&rsquo;t just a sport. Join a community of 30,000 fans and players who relish the art, history, and culture of the game. Featuring exclusive interviews, photography, essays, guides, and more.</p>
     <div class="hero-row reveal reveal-d2">
       <a href="https://buy.stripe.com/6oE16m4XGdg56f6fYY" class="btn btn--accent">Get Started</a>
     </div>
