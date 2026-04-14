@@ -772,7 +772,12 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 @media (max-width: 640px) {
   .hero { height: 75vh; }
   .hero-content { padding: 0 24px 40px; }
+  .hero-img::after {
+    background: rgba(0,0,0,0.45);
+  }
+  .cover-strip-label .coffee-break { display: block; }
 }
+.cover-strip-label .coffee-break { display: inline; }
 </style>
 </head>
 <body>
@@ -808,7 +813,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 
 <!-- INFINITE COVER SCROLL -->
 <section class="cover-strip">
-  <p class="cover-strip-label">28 issues. 10 years. Countless coffee tables.</p>
+  <p class="cover-strip-label">28 issues. 10 years. <span class="coffee-break">Countless coffee tables.</span></p>
   <div class="cover-track">
     <img src="../carousel-1.png" alt="Racquet covers">
     <img src="../carousel-3.png" alt="Racquet covers">
