@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RACQUET — Join</title>
+<title>RACQUET — Join + Free Corduroy Hat</title>
 <meta name="description" content="The tennis magazine. Art, culture, and the game. $100/year.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -238,10 +238,8 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .press-bar-inner .logo-nymag { height: 20px; }
 .press-bar-inner .logo-media { height: 22px; }
 .press-bar-inner .logo-airmail {
-  font-family: 'Libre Franklin', 'Helvetica Neue', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
+  height: 16px;
+  filter: grayscale(1) contrast(8) invert(1);
   opacity: 0.5;
 }
 
@@ -671,6 +669,93 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   opacity: 0.4;
 }
 
+/* ======= HERO GIFT BADGE ======= */
+.hero-gift {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  z-index: 2;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(6px);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  animation: hero-gift-pop 0.4s cubic-bezier(.23,1,.32,1) 0.6s both;
+}
+@keyframes hero-gift-pop {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-gift img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+.hero-gift span {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  line-height: 1.3;
+}
+@media (max-width: 640px) {
+  .hero-gift { top: 12px; right: 12px; padding: 6px 12px; gap: 8px; }
+  .hero-gift img { width: 28px; height: 28px; }
+  .hero-gift span { font-size: 0.5rem; }
+}
+
+/* ======= FREE GIFT ======= */
+.gift-section {
+  padding: 80px 24px;
+  text-align: center;
+  background: #fff;
+  color: var(--ink);
+}
+.gift-badge {
+  display: inline-block;
+  color: var(--gray);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid rgba(0,0,0,0.15);
+  padding: 6px 12px;
+  margin-bottom: 20px;
+}
+.gift-section h2 {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  margin-bottom: 12px;
+}
+.gift-section .gift-desc {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--gray);
+  max-width: 520px;
+  margin: 0 auto 8px;
+}
+.gift-specs {
+  font-size: 0.78rem;
+  color: var(--gray-light);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+.gift-img {
+  max-width: 360px;
+  margin: 0 auto 32px;
+}
+.gift-img img {
+  width: 100%;
+  height: auto;
+  mix-blend-mode: multiply;
+}
+
 /* ======= SCROLL REVEALS ======= */
 .reveal {
   opacity: 0;
@@ -692,19 +777,19 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 
 <!-- URGENCY BAR -->
 <div class="topbar">
-  Issue No. 27 is sold out.
-  <a href="https://buy.stripe.com/6oE16m4XGdg56f6fYY">Secure No. 28 &rarr;</a>
+  Subscribe today &amp; get a free Racquet Corduroy Hat
+  <a href="#free-gift">Claim now &rarr;</a>
 </div>
 
 <!-- NAV -->
 <nav class="nav">
-  <a href="https://racquetmag.com"><img src="./racquet logo.svg" alt="RACQUET" class="nav-logo"></a>
+  <a href="https://racquetmag.com"><img src="../racquet logo.svg" alt="RACQUET" class="nav-logo"></a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-img">
-    <img src="./beautiful_court_1.webp" alt="Tennis court at golden hour" loading="eager">
+    <img src="../beautiful_court_1.webp" alt="Tennis court at golden hour" loading="eager">
   </div>
   <div class="hero-content">
     <h1 class="reveal">The magazine tennis <span>deserves.</span></h1>
@@ -723,11 +808,11 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 <section class="cover-strip">
   <p class="cover-strip-label">28 issues. 10 years. Countless coffee tables.</p>
   <div class="cover-track">
-    <img src="./carousel-1.png" alt="Racquet covers">
-    <img src="./carousel-3.png" alt="Racquet covers">
+    <img src="../carousel-1.png" alt="Racquet covers">
+    <img src="../carousel-3.png" alt="Racquet covers">
     <!-- duplicate for infinite loop -->
-    <img src="./carousel-1.png" alt="Racquet covers">
-    <img src="./carousel-3.png" alt="Racquet covers">
+    <img src="../carousel-1.png" alt="Racquet covers">
+    <img src="../carousel-3.png" alt="Racquet covers">
   </div>
 </section>
 
@@ -735,17 +820,17 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 <section class="press-bar">
   <p class="press-bar-label">As Featured In</p>
   <div class="press-bar-inner">
-    <img src="./media logos.png" alt="NYT, WSJ, ESPN, GQ, Monocle" class="logo-media">
-    <img src="./New_York_Magazine_Logo.svg.png" alt="New York Magazine" class="logo-nymag">
-<img src="./I-D_Magazine_Logo.svg.png" alt="i-D" class="logo-id">
-    <img src="./Puck_media_company.png" alt="Puck" class="logo-puck">
+    <img src="../media logos.png" alt="NYT, WSJ, ESPN, GQ, Monocle" class="logo-media">
+    <img src="../New_York_Magazine_Logo.svg.png" alt="New York Magazine" class="logo-nymag">
+<img src="../I-D_Magazine_Logo.svg.png" alt="i-D" class="logo-id">
+    <img src="../Puck_media_company.png" alt="Puck" class="logo-puck">
   </div>
 </section>
 
 <!-- ISSUE 28 -->
 <section class="issue-section">
   <div class="issue-img">
-    <img src="./issue-28.png" alt="Issue No. 28" loading="lazy">
+    <img src="../issue-28.png" alt="Issue No. 28" loading="lazy">
   </div>
   <div class="issue-text">
     <p class="issue-label reveal">Now Shipping</p>
@@ -798,7 +883,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 <!-- BENEFITS -->
 <section class="benefits-split">
   <div class="benefits-photo">
-    <img src="./girl_with_tennis_ball_eyes.webp" alt="Tennis lifestyle" loading="lazy">
+    <img src="../girl_with_tennis_ball_eyes.webp" alt="Tennis lifestyle" loading="lazy">
   </div>
   <div class="benefits-content">
     <h2 class="reveal">What Your Membership Gets You</h2>
@@ -852,12 +937,24 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   </div>
 </section>
 
+<!-- FREE GIFT -->
+<section class="gift-section" id="free-gift">
+  <span class="gift-badge reveal">Free with your subscription</span>
+  <h2 class="reveal reveal-d1">Racquet Corduroy Hat</h2>
+  <p class="gift-desc reveal reveal-d2">Our collaboration with Official League gives you that PNW vibe on and off the court. Crafted from premium cream corduroy with a forest green bill and Racquet wordmark logo stitched into the front&mdash;made in Portland, Oregon.</p>
+  <p class="gift-specs reveal reveal-d2">100% premium corduroy base &middot; One size fits all</p>
+  <div class="gift-img reveal reveal-d2">
+    <img src="../Racquet_Cord_Hat_Side_2.webp" alt="Racquet Corduroy Hat" loading="lazy">
+  </div>
+  <a href="https://buy.stripe.com/6oE16m4XGdg56f6fYY" class="btn btn--dark reveal reveal-d3">Subscribe + Claim Hat ($40 value)</a>
+</section>
+
 <!-- COLLABS -->
 <section class="collabs">
   <h2 class="reveal">Exclusive Collaborations</h2>
   <p class="reveal reveal-d1">Racquet partners with today's most iconic brands and artists like adidas, Clare V., and Sergio Tacchini to bring you exclusive merch, gear, and other paraphernalia. Get early access to exclusive drops, limited-edition print issues, and one-of-a-kind gear before they sell out.</p>
   <div class="collabs-logos reveal reveal-d1">
-    <img src="./collaborations.png" alt="Rolex, Gucci, Lacoste, Wimbledon, ATP Tour, Sergio Tacchini, BNP Paribas">
+    <img src="../collaborations.png" alt="Rolex, Gucci, Lacoste, Wimbledon, ATP Tour, Sergio Tacchini, BNP Paribas">
   </div>
   <a href="https://buy.stripe.com/6oE16m4XGdg56f6fYY" class="btn btn--collabs reveal reveal-d2">Get Started</a>
 </section>
@@ -865,7 +962,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 <!-- ABOUT -->
 <section class="about-section">
   <div class="about-bg">
-    <img src="./danielle.png" alt="" loading="lazy">
+    <img src="../danielle.png" alt="" loading="lazy">
   </div>
   <div class="about-card reveal">
     <h2>About Racquet</h2>
@@ -902,7 +999,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 
 <!-- FOOTER -->
 <footer class="footer">
-  <img src="./racquet logo.svg" alt="RACQUET" class="footer-logo">
+  <img src="../racquet logo.svg" alt="RACQUET" class="footer-logo">
   <div class="footer-socials">
     <a href="https://www.instagram.com/racquetmag/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
     <a href="https://www.threads.com/@racquetmag" aria-label="Threads"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.59 12c.025 3.086.718 5.496 2.057 7.164 1.432 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.29 3.276-1.06 1.316-2.572 2.013-4.5 2.074a6.028 6.028 0 0 1-.161.002c-1.467 0-2.753-.463-3.72-1.338-1.058-.957-1.59-2.249-1.59-3.69 0-1.87.65-3.305 1.929-4.264.945-.709 2.164-1.082 3.566-1.119h.014c1.51.008 2.832.344 3.847 1.084z"/></svg></a>
