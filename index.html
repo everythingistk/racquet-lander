@@ -188,25 +188,12 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .cover-track {
   display: flex;
   width: max-content;
-  animation: scroll-covers 60s linear infinite;
   will-change: transform;
-  -webkit-animation: scroll-covers 60s linear infinite;
 }
 .cover-track img {
   height: 380px;
   width: auto;
   flex-shrink: 0;
-}
-@-webkit-keyframes scroll-covers {
-  0% { -webkit-transform: translateX(0); transform: translateX(0); }
-  100% { -webkit-transform: translateX(-50%); transform: translateX(-50%); }
-}
-@keyframes scroll-covers {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.cover-strip:hover .cover-track {
-  animation-play-state: paused;
 }
 
 /* ======= LOGO BAR ======= */
@@ -937,6 +924,22 @@ function reveal() {
 window.addEventListener('scroll', reveal, { passive: true });
 reveal();
 requestAnimationFrame(reveal);
+
+// Cover carousel — JS-driven for mobile Safari compatibility
+(function() {
+  var track = document.querySelector('.cover-track');
+  if (!track) return;
+  var pos = 0;
+  var speed = 0.5; // pixels per frame
+  var half = track.scrollWidth / 2;
+  function tick() {
+    pos -= speed;
+    if (pos <= -half) pos += half;
+    track.style.transform = 'translateX(' + pos + 'px)';
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
 </script>
 </body>
 </html>
