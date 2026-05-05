@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RACQUET — Join</title>
+<meta name="description" content="The only membership for the tennis-obsessed.">
+<meta property="og:title" content="RACQUET — Join">
+<meta property="og:description" content="The only membership for the tennis-obsessed.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F2EDE8;
+  --ink: #111;
+  --accent: #C8E442;
+  --accent-dark: #9AB830;
+  --navy: #0C1A2E;
+  --gray: #7A756E;
+  --gray-light: #B5AFA7;
+  --cream: #FAF7F2;
+  --serif: 'Cormorant Garamond', 'Georgia', serif;
+  --sans: 'Libre Franklin', 'Helvetica Neue', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+body { font-family: var(--sans); color: var(--ink); background: var(--bg); overflow-x: hidden; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; font-family: inherit; background: none; }
+
+/* ======= URGENCY BAR ======= */
+.topbar {
+  background: var(--ink);
+  color: var(--bg);
+  text-align: center;
+  padding: 10px 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  z-index: 100;
+}
+.topbar a {
+  color: var(--accent);
+  margin-left: 8px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.topbar a:hover { color: #fff; }
+
+/* ======= NAV ======= */
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 24px;
+  z-index: 99;
+  background: var(--bg);
+}
+.nav-logo { height: 16px; filter: brightness(0); }
+
+/* ======= HERO ======= */
+.hero {
+  position: relative;
+  height: 90vh;
+  min-height: 600px;
+  max-height: 1000px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+.hero-img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+}
+.hero-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.75) 0%,
+    rgba(0,0,0,0.45) 40%,
+    rgba(0,0,0,0.05) 75%
+  );
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 0 48px 56px;
+  width: 100%;
+  max-width: 900px;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 1.05;
+  color: #fff;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+.hero h1 span {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 500;
+}
+.hero-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 15px 36px;
+  transition: all 0.25s;
+}
+.btn--accent {
+  background: var(--accent);
+  color: var(--ink);
+}
+.btn--accent:hover {
+  background: #fff;
+}
+.btn--ghost {
+  color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.btn--ghost:hover {
+  color: #fff;
+  border-color: #fff;
+}
+.hero-desc {
+  color: rgba(255,255,255,0.85);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  max-width: 520px;
+  margin-bottom: 36px;
+}
+.hero-offer {
+  margin-top: 36px;
+}
+.hero-offer-title {
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.hero-offer-detail {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.82rem;
+  font-style: italic;
+  line-height: 1.5;
+  max-width: 480px;
+}
+
+/* ======= INFINITE COVER SCROLL ======= */
+.cover-strip {
+  padding: 40px 0;
+  overflow: hidden;
+  background: var(--bg);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.cover-strip-label {
+  text-align: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 32px;
+}
+.cover-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+.cover-track img {
+  height: 380px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+/* ======= LOGO BAR ======= */
+.press-bar {
+  padding: 40px 24px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.press-bar-label {
+  text-align: center;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 20px;
+}
+.press-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  flex-wrap: wrap;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.press-bar-inner img {
+  height: 22px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.5;
+}
+.press-bar-inner .logo-puck { height: 26px; }
+.press-bar-inner .logo-id { height: 22px; }
+.press-bar-inner .logo-nymag { height: 20px; }
+.press-bar-inner .logo-media { height: 22px; }
+.press-bar-inner .logo-airmail {
+  font-family: 'Libre Franklin', 'Helvetica Neue', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  opacity: 0.5;
+}
+
+/* ======= ISSUE 28 ======= */
+.issue-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 600px;
+}
+.issue-img {
+  overflow: hidden;
+}
+.issue-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.issue-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 64px;
+  background: var(--navy);
+  color: #fff;
+}
+.issue-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+.issue-text h2 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.issue-text p {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 8px;
+  font-weight: 400;
+  max-width: 440px;
+}
+.issue-text .soldout-tag {
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 28px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-style: italic;
+  color: rgba(255,255,255,0.55);
+}
+.issue-text .btn--accent { margin-top: 4px; }
+
+@media (max-width: 768px) {
+  .issue-section { grid-template-columns: 1fr; }
+  .issue-text { padding: 48px 24px; }
+}
+
+/* ======= QUOTES ======= */
+.quotes {
+  padding: 64px 24px;
+  background: var(--cream);
+}
+.quotes-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.quote-block {
+  padding: 36px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.quote-block:last-child { border-bottom: none; }
+.quote-block blockquote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3.5vw, 2.6rem);
+  line-height: 1.25;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+.quote-block cite {
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+/* Feature quote — big */
+.quote-block--feature blockquote {
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 300;
+}
+
+/* Side-by-side quotes */
+.quotes-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.quotes-duo .quote-block {
+  padding: 36px 40px;
+  border-bottom: none;
+}
+.quotes-duo .quote-block:first-child {
+  border-right: 1px solid rgba(0,0,0,0.06);
+  padding-left: 0;
+}
+.quotes-duo .quote-block:last-child { padding-right: 0; }
+.quotes-duo blockquote { font-size: clamp(1.35rem, 2.5vw, 1.6rem); }
+
+@media (max-width: 768px) {
+  .quotes-duo { grid-template-columns: 1fr; }
+  .quotes-duo .quote-block:first-child { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.06); padding: 36px 0; }
+  .quotes-duo .quote-block:last-child { padding: 36px 0; }
+  .quotes-duo blockquote { font-size: 1.5rem; }
+}
+
+/* ======= BENEFITS SPLIT ======= */
+.benefits-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 700px;
+}
+.benefits-photo {
+  position: relative;
+  overflow: hidden;
+}
+.benefits-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.benefits-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 64px;
+  background: #E8E2DA;
+  color: var(--ink);
+}
+.benefits-content h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  line-height: 1.15;
+  margin-bottom: 32px;
+}
+.benefit-row {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+.benefit-row:last-child { border-bottom: 1px solid rgba(0,0,0,0.08); }
+.benefit-num {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--gray);
+  flex-shrink: 0;
+  width: 28px;
+}
+.benefit-row h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+.benefit-row p {
+  font-size: 0.88rem;
+  color: var(--gray);
+  line-height: 1.6;
+  font-weight: 400;
+}
+.benefits-cta {
+  margin-top: 32px;
+}
+
+@media (max-width: 768px) {
+  .benefits-split { grid-template-columns: 1fr; }
+  .benefits-content { padding: 48px 24px; }
+  .benefits-photo { min-height: 350px; }
+}
+
+/* ======= LIFESTYLE STRIP ======= */
+.lifestyle-strip {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  height: 480px;
+}
+.lifestyle-strip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+@media (max-width: 768px) {
+  .lifestyle-strip { grid-template-columns: 1fr 1fr; height: 300px; }
+}
+
+/* ======= COLLABS ======= */
+.collabs {
+  padding: 80px 24px;
+  text-align: center;
+  background: #2D4A3E;
+  color: #fff;
+}
+.collabs h2 {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  margin-bottom: 12px;
+  color: #fff;
+}
+.collabs p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.75);
+  max-width: 560px;
+  margin: 0 auto 28px;
+  line-height: 1.7;
+}
+.collabs-brands {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  max-width: 600px;
+  margin: 0 auto 36px;
+  line-height: 2;
+}
+.collabs-logos {
+  max-width: 700px;
+  margin: 0 auto 32px;
+}
+.collabs-logos img {
+  width: 100%;
+  height: auto;
+  opacity: 0.7;
+}
+.collabs .btn { margin-top: 8px; }
+.btn--collabs {
+  background: #fff;
+  color: #2D4A3E;
+}
+.btn--collabs:hover {
+  background: var(--accent);
+  color: var(--ink);
+}
+
+.btn--dark {
+  background: var(--ink);
+  color: var(--bg);
+}
+.btn--dark:hover {
+  background: var(--navy);
+}
+
+/* ======= ABOUT ======= */
+.about-section {
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 60px 24px;
+}
+.about-bg {
+  position: absolute;
+  inset: 0;
+}
+.about-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.about-card {
+  position: relative;
+  z-index: 1;
+  max-width: 540px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  padding: 48px;
+  text-align: center;
+}
+.about-card h2 {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+.about-card p {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: #3A3A36;
+}
+
+/* ======= FINAL 8 ======= */
+.final8 {
+  padding: 72px 24px;
+  text-align: center;
+  background: var(--cream);
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+.final8 h2 {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+.final8 p {
+  font-size: 0.85rem;
+  color: var(--gray);
+  max-width: 400px;
+  margin: 0 auto 28px;
+  line-height: 1.6;
+}
+.btn--outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+}
+.btn--outline:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* ======= FAQ ======= */
+.faq {
+  padding: 72px 24px 88px;
+  background: var(--bg);
+}
+.faq h2 {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.faq-list {
+  max-width: 580px;
+  margin: 0 auto;
+}
+.faq-item {
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+.faq-q {
+  padding: 18px 0 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink);
+  font-family: var(--sans);
+}
+.faq-a p {
+  padding: 0 0 18px;
+  font-size: 0.82rem;
+  color: var(--gray);
+  line-height: 1.6;
+}
+.faq-a a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ======= FOOTER ======= */
+.footer {
+  background: var(--ink);
+  color: rgba(255,255,255,0.5);
+  padding: 56px 24px 40px;
+  text-align: center;
+}
+.footer-logo {
+  height: 14px;
+  margin: 0 auto 24px;
+  filter: brightness(0) invert(1);
+}
+.footer-socials {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.footer-socials a {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.footer-socials a:hover { border-color: var(--accent); background: var(--accent); color: var(--ink); }
+.footer-socials svg { width: 13px; height: 13px; }
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.footer-links a {
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: #fff; }
+.footer-copy {
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.4;
+}
+
+/* ======= SCROLL REVEALS ======= */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(.23,1,.32,1), transform 0.7s cubic-bezier(.23,1,.32,1);
+}
+.reveal.vis { opacity: 1; transform: none; }
+.reveal-d1 { transition-delay: 0.08s; }
+.reveal-d2 { transition-delay: 0.16s; }
+.reveal-d3 { transition-delay: 0.24s; }
+
+@media (max-width: 640px) {
+  .hero { height: 75vh; }
+  .hero-content { padding: 0 24px 40px; }
+  .hero-img::after {
+    background: rgba(0,0,0,0.45);
+  }
+  .cover-strip-label .coffee-break { display: block; }
+}
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '406584923533121');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent');
+</script>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<!-- URGENCY BAR -->
+<div class="topbar">
+  Issue No. 27 is sold out.
+  <a href="https://buy.stripe.com/6oE16m4XGdg56f6fYY">Secure No. 28 &rarr;</a>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="https://racquetmag.com"><img src="../racquet logo.svg" alt="RACQUET" class="nav-logo"></a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-img">
+    <img src="../beautiful_court_1.webp" alt="Tennis court at golden hour" loading="eager">
+  </div>
+  <div class="hero-content">
+    <h1 class="reveal">The magazine tennis <span>deserves.</span></h1>
+    <p class="hero-desc reveal reveal-d1">For those who know tennis isn&rsquo;t just a sport. Join a community of 30,000 fans and players who relish the art, history, and culture of the game. Featuring exclusive interviews, photography, essays, guides, and more.</p>
+    <div class="hero-row reveal reveal-d2">
+      <a href="https://buy.stripe.com/6oE16m4XGdg56f6fYY" class="btn btn--accent">Get Started</a>
+    </div>
+    <div class="hero-offer reveal reveal-d3">
+      <p class="hero-offer-title">Annual Digital + Print Membership ($100/year)</p>
+      <p class="hero-offer-detail">Enjoy full digital access and receive two collectible print editions a year.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INFINITE COVER SCROLL -->
+<section class="cover-strip">
+  <p class="cover-strip-label">28 issues. 10 years. <span class="coffee-break">Countless coffee tables.</span></p>
+  <div class="cover-track">
+    <img src="../carousel-1.png" alt="Racquet covers">
+    <img src="../carousel-3.png" alt="Racquet covers">
+    <!-- duplicate for infinite loop -->
+    <img src="../carousel-1.png" alt="Racquet covers">
+    <img src="../carousel-3.png" alt="Racquet covers">
+  </div>
+</section>
+
+<!-- PRESS BAR -->
+<section class="press-bar">
+  <p class="press-bar-label">As Featured In</p>
+  <div class="press-bar-inner">
+    <img src="../media logos.png" alt="NYT, WSJ, ESPN, GQ, Monocle" class="logo-media">
+    <img src="../New_York_Magazine_Logo.svg.png" alt="New York Magazine" class="logo-nymag">
+<img src="../I-D_Magazine_Logo.svg.png" alt="i-D" class="logo-id">
+    <img src="../Puck_media_company.png" alt="Puck" class="logo-puck">
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits-split">
+  <div class="benefits-photo">
+    <img src="../girl_with_tennis_ball_eyes.webp" alt="Tennis lifestyle" loading="lazy">
+  </div>
+  <div class="benefits-content">
+    <h2 class="reveal">The Only Membership for the Tennis-Obsessed</h2>
+    <div class="reveal reveal-d1">
+      <div class="benefit-row">
+        <span class="benefit-num">01</span>
+        <div>
+          <h3>Exclusive Stories &amp; Art</h3>
+          <p>Profiles, essays, photography, and illustrations you won't find anywhere else.</p>
+        </div>
+      </div>
+      <div class="benefit-row">
+        <span class="benefit-num">02</span>
+        <div>
+          <h3>Full Digital Access</h3>
+          <p>Every past issue. Every story. Ongoing coverage so you never miss a beat.</p>
+        </div>
+      </div>
+      <div class="benefit-row">
+        <span class="benefit-num">03</span>
+        <div>
+          <h3>Gorgeous Print Editions</h3>
+          <p>Two limited editions per year on stock that feels as good as it reads.</p>
+        </div>
+      </div>
+      <div class="benefit-row">
+        <span class="benefit-num">04</span>
+        <div>
+          <h3>Early Access to Drops</h3>
+          <p>Collabs, merch, and gear before anyone else gets a look.</p>
+        </div>
+      </div>
+      <div class="benefit-row">
+        <span class="benefit-num">05</span>
+        <div>
+          <h3>Events &amp; Experiences</h3>
+          <p>Curated tennis events, including at the US Open.</p>
+        </div>
+      </div>
+      <div class="benefit-row">
+        <span class="benefit-num">06</span>
+        <div>
+          <h3>30,000+ Tastemakers</h3>
+          <p>A global community who care about the culture of the game.</p>
+        </div>
+      </div>
+    </div>
+    <div class="benefits-cta reveal reveal-d2">
+      <a href="https://buy.stripe.com/6oE16m4XGdg56f6fYY" class="btn btn--dark">Join &mdash; $100/year</a>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTES -->
+<section class="quotes">
+  <div class="quotes-inner">
+    <div class="quote-block quote-block--feature reveal">
+      <blockquote>&ldquo;A deliciously smart magazine&mdash;a game-set-match of literary bona fides.&rdquo;</blockquote>
+      <cite>The New York Times T Magazine</cite>
+    </div>
+
+    <div class="quotes-duo">
+      <div class="quote-block reveal">
+        <blockquote>&ldquo;A rare tennis magazine with taste.&rdquo;</blockquote>
+        <cite>i-D</cite>
+      </div>
+      <div class="quote-block reveal reveal-d1">
+        <blockquote>&ldquo;A smash hit.&rdquo;</blockquote>
+        <cite>Monocle</cite>
+      </div>
+    </div>
+
+    <div class="quotes-duo">
+      <div class="quote-block reveal">
+        <blockquote>&ldquo;A truly stylish tennis magazine and media company.&rdquo;</blockquote>
+        <cite>Air Mail</cite>
+      </div>
+      <div class="quote-block reveal reveal-d1">
+        <blockquote>&ldquo;Blending top-tier journalism, tennis fashion, travel, and escapism.&rdquo;</blockquote>
+        <cite>Puck</cite>
+      </div>
+    </div>
+
+    <div class="quote-block reveal">
+      <blockquote>&ldquo;The premier destination for conversation and community around a global sport.&rdquo;</blockquote>
+      <cite>New York Magazine</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ISSUE 28 -->
+<section class="issue-section">
+  <div class="issue-img">
+    <img src="../issue-28.png" alt="Issue No. 28" loading="lazy">
+  </div>
+  <div class="issue-text">
+    <p class="issue-label reveal">Now Shipping</p>
+    <h2 class="reveal reveal-d1">Issue No. 28<br>Art &amp; Architecture</h2>
+    <p class="reveal reveal-d2">Blueprints and canvas are the animating themes of this issue&mdash;which builds on the infrastructure of the 78&rsquo; x 36&rsquo; frame of a tennis court and radiates outwards. From glorious tennis structures surrounding the field of play to gallery walls, where celebrated artists tangle with tennis in their various mediums: this 28th edition of Racquet is dedicated to it all.</p>
+    <p class="soldout-tag reveal reveal-d2">Issue No. 27 sold out &mdash; subscribe now to ensure you receive No. 28.</p>
+    <div class="reveal reveal-d3">
+      <a href="https://buy.stripe.com/6oE16m4XGdg56f6fYY" class="btn btn--accent">Secure Your Copy</a>
+    </div>
+  </div>
+</section>
+
+<!-- COLLABS -->
+<section class="collabs">
+  <h2 class="reveal">Exclusive Collaborations</h2>
+  <p class="reveal reveal-d1">Racquet partners with today's most iconic brands and artists like adidas, Clare V., and Sergio Tacchini to bring you exclusive merch, gear, and other paraphernalia. Get early access to exclusive drops, limited-edition print issues, and one-of-a-kind gear before they sell out.</p>
+  <div class="collabs-logos reveal reveal-d1">
+    <img src="../collaborations.png" alt="Rolex, Gucci, Lacoste, Wimbledon, ATP Tour, Sergio Tacchini, BNP Paribas">
+  </div>
+  <a href="https://buy.stripe.com/6oE16m4XGdg56f6fYY" class="btn btn--collabs reveal reveal-d2">Get Started</a>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section">
+  <div class="about-bg">
+    <img src="../danielle.png" alt="" loading="lazy">
+  </div>
+  <div class="about-card reveal">
+    <h2>About Racquet</h2>
+    <p>Racquet has broken some of the biggest stories in tennis before anyone else. Our coverage blends deep reporting with striking visuals, making us the go-to source for tennis culture. Whether it&rsquo;s an exclusive interview with a rising star, an untold story from the sport&rsquo;s past, or an investigative deep-dive, we set the narrative before the rest of the media catches up.</p>
+    <a href="https://buy.stripe.com/6oE16m4XGdg56f6fYY" class="btn btn--dark" style="margin-top:24px;">Get Started</a>
+  </div>
+</section>
+
+<!-- FINAL 8 -->
+<section class="final8">
+  <h2 class="reveal">The Final 8 Club</h2>
+  <p class="reveal reveal-d1">Concierge-level access to exclusive courts, events, and tournament experiences.</p>
+  <a href="mailto:info@racquetmag.com" class="btn btn--outline reveal reveal-d2">Inquiries</a>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <h2>Questions</h2>
+  <div class="faq-list">
+    <div class="faq-item open">
+      <div class="faq-q">When will my first issue arrive?</div>
+      <div class="faq-a"><p>Your first magazine (Issue No. 28) should arrive within two weeks of ordering it.</p></div>
+    </div>
+    <div class="faq-item open">
+      <div class="faq-q">Do subscriptions auto-renew?</div>
+      <div class="faq-a"><p>All subscriptions automatically renew. But you can easily cancel your subscription at any point online.</p></div>
+    </div>
+    <div class="faq-item open">
+      <div class="faq-q">Can I gift a subscription?</div>
+      <div class="faq-a"><p>Absolutely! Racquet makes the perfect gift for any tennis lover. Just <a href="https://racquetmag.com/gift/products">head here to get started</a>.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <img src="../racquet logo.svg" alt="RACQUET" class="footer-logo">
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/racquetmag/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
+    <a href="https://www.threads.com/@racquetmag" aria-label="Threads"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.59 12c.025 3.086.718 5.496 2.057 7.164 1.432 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.29 3.276-1.06 1.316-2.572 2.013-4.5 2.074a6.028 6.028 0 0 1-.161.002c-1.467 0-2.753-.463-3.72-1.338-1.058-.957-1.59-2.249-1.59-3.69 0-1.87.65-3.305 1.929-4.264.945-.709 2.164-1.082 3.566-1.119h.014c1.51.008 2.832.344 3.847 1.084z"/></svg></a>
+    <a href="https://x.com/racquetmagazine" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    <a href="https://www.tiktok.com/@racquetmedia" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.88-2.88 2.89 2.89 0 0 1 2.88-2.89c.28 0 .55.04.81.1v-3.5a6.37 6.37 0 0 0-.81-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.78a8.18 8.18 0 0 0 4.76 1.52v-3.4a4.85 4.85 0 0 1-1-.21z"/></svg></a>
+    <a href="https://www.youtube.com/@racquet1424" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+  </div>
+  <div class="footer-links">
+    <a href="https://shop.racquetmag.com/pages/terms-conditions">Terms &amp; Conditions</a>
+    <a href="https://shop.racquetmag.com/pages/privacy-policy">Privacy Policy</a>
+    <a href="https://shop.racquetmag.com/pages/shipping-returns">Shipping &amp; Returns</a>
+  </div>
+  <p class="footer-copy">&copy; 2025 Racquet</p>
+</footer>
+
+<script>
+function reveal() {
+  document.querySelectorAll('.reveal:not(.vis)').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight - 30) el.classList.add('vis');
+  });
+}
+window.addEventListener('scroll', reveal, { passive: true });
+reveal();
+requestAnimationFrame(reveal);
+
+// Cover carousel — JS-driven for mobile Safari compatibility
+(function() {
+  var track = document.querySelector('.cover-track');
+  if (!track) return;
+  var pos = 0;
+  var speed = 0.5; // pixels per frame
+  var half = track.scrollWidth / 2;
+  function tick() {
+    pos -= speed;
+    if (pos <= -half) pos += half;
+    track.style.transform = 'translateX(' + pos + 'px)';
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
