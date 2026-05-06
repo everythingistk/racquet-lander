@@ -673,43 +673,73 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   opacity: 0.4;
 }
 
-/* ======= HERO GIFT BADGE ======= */
+/* ======= HERO GIFT CALLOUT ======= */
 .hero-gift {
   position: absolute;
-  top: 20px;
-  right: 24px;
+  top: 88px;
+  right: 32px;
   z-index: 2;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(6px);
-  padding: 8px 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
-  animation: hero-gift-pop 0.4s cubic-bezier(.23,1,.32,1) 0.6s both;
+  width: 240px;
+  background: #fff;
+  padding: 18px 18px 20px;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.25), 0 2px 8px rgba(0,0,0,0.15);
+  animation: hero-gift-pop 0.5s cubic-bezier(.23,1,.32,1) 0.5s both;
 }
 @keyframes hero-gift-pop {
-  from { opacity: 0; transform: translateY(-8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(-12px) scale(0.92); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.hero-gift::before {
+  content: 'Free Gift';
+  display: block;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin-bottom: 8px;
+  letter-spacing: 0.01em;
 }
 .hero-gift img {
-  width: 36px;
-  height: 36px;
+  width: 100%;
+  height: 150px;
   object-fit: contain;
-  border-radius: 50%;
+  display: block;
+  margin: 0 auto 10px;
+  mix-blend-mode: multiply;
 }
-.hero-gift span {
-  font-size: 0.58rem;
+.hero-gift .hero-gift-label {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink);
-  line-height: 1.3;
+  line-height: 1.35;
 }
-@media (max-width: 640px) {
-  .hero-gift { top: 12px; right: 12px; padding: 6px 12px; gap: 8px; }
-  .hero-gift img { width: 28px; height: 28px; }
-  .hero-gift span { font-size: 0.5rem; }
+.hero-gift .hero-gift-value {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--sans);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+@media (max-width: 768px) {
+  .hero-gift {
+    width: 96px;
+    top: 12px;
+    right: 12px;
+    padding: 6px 6px 8px;
+  }
+  .hero-gift::before { font-size: 0.7rem; margin-bottom: 2px; }
+  .hero-gift img { height: 50px; margin-bottom: 3px; }
+  .hero-gift .hero-gift-label { font-size: 0.42rem; letter-spacing: 0.06em; }
+  .hero-gift .hero-gift-value { font-size: 0.4rem; margin-top: 2px; letter-spacing: 0.06em; }
 }
 
 /* ======= FREE GIFT ======= */
@@ -825,6 +855,11 @@ fbq('track', 'ViewContent');
   <div class="hero-img">
     <img src="../beautiful_court_1.webp" alt="Tennis court at golden hour" loading="eager">
   </div>
+  <a href="#free-gift" class="hero-gift" aria-label="Free Racquet Bear Hat with subscription">
+    <img src="../racquet_bear.webp" alt="Racquet Bear Hat">
+    <span class="hero-gift-label">Bear hat with subscription</span>
+    <span class="hero-gift-value">$40 value</span>
+  </a>
   <div class="hero-content">
     <h1 class="reveal">The magazine tennis <span>deserves.</span></h1>
     <p class="hero-desc reveal reveal-d1">For those who know tennis isn&rsquo;t just a sport. Join a community of 30,000 fans and players who relish the art, history, and culture of the game. Featuring exclusive interviews, photography, essays, guides, and more.</p>
